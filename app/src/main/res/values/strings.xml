@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Dice</string>
+    <string-array name="dice_options">
+    <item>4</item>
+    <item>6</item>
+    <item>8</item>
+        <item>custom</item>
+    <!-- Add more items as needed -->
+</string-array>
+</resources>
+
