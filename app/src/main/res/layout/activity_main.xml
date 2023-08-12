@@ -1,41 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <Spinner
-        android:id="@+id/diceSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/customDiceSidesEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter custom sides"
-        android:inputType="number" />
-
-
-
-    <Button
-        android:id="@+id/rollButton"
+    <ToggleButton
+        android:id="@+id/nightModeToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Roll Once"
+        android:text="Night Mode"
+        android:textOff="Day"
+        android:textOn="Night"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"/>
 
-
-    <Button
-        android:id="@+id/rollTwiceButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Roll Twice"
-        android:layout_marginTop="8dp"/>
+        android:layout_below="@id/nightModeToggleButton"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/diceSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/customDiceSidesEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter custom sides"
+            android:inputType="number"
+            android:layout_marginTop="8dp" />
+
+        <Button
+            android:id="@+id/rollButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll Once"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/rollTwiceButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Roll Twice"
+            android:layout_marginTop="8dp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="wrap_content"
@@ -43,13 +62,4 @@
         android:layout_marginTop="16dp"
         android:textSize="24sp"
         android:textStyle="bold"/>
-
-
-
-
-
-
-
-
-
-</LinearLayout>
+</RelativeLayout>

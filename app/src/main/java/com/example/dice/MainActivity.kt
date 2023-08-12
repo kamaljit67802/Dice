@@ -1,15 +1,17 @@
 package com.example.dice
 
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.max
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var customDiceSidesEditText: EditText
+    private lateinit var nightModeToggleButton: ToggleButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE)
         customDiceSidesEditText = findViewById(R.id.customDiceSidesEditText)
+        nightModeToggleButton = findViewById(R.id.nightModeToggleButton)
 
         val diceOptions = resources.getStringArray(R.array.dice_options)
         val diceSpinner: Spinner = findViewById(R.id.diceSpinner)
@@ -27,6 +30,14 @@ class MainActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, diceOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         diceSpinner.adapter = adapter
+
+        nightModeToggleButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                applyNightMode()
+            } else {
+                applyDayMode()
+            }
+        }
 
         rollButton.setOnClickListener {
             val selectedDice = getSelectedDice()
@@ -49,7 +60,7 @@ class MainActivity : AppCompatActivity() {
     private fun getSelectedDice(): Int {
         val selectedDiceText = customDiceSidesEditText.text.toString().trim()
         return if (selectedDiceText.isNotEmpty()) {
-            max(1, selectedDiceText.toInt()) // Ensure at least 1 side
+            max(1, selectedDiceText.toInt())
         } else {
             val selectedSpinnerItem = (findViewById<Spinner>(R.id.diceSpinner)).selectedItem.toString()
             selectedSpinnerItem.toInt()
@@ -61,5 +72,17 @@ class MainActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("myvals", valueString)
         editor.apply()
+    }
+
+    private fun applyNightMode() {
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setBackgroundColor(resources.getColor(R.color.colorNightBackground))
+        // Adjust other styling elements for night mode
+    }
+
+    private fun applyDayMode() {
+        val rootView = findViewById<View>(android.R.id.content)
+        rootView.setBackgroundColor(resources.getColor(R.color.colorDayBackground))
+        // Reset styling changes made for night mode
     }
 }
